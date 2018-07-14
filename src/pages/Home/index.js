@@ -10,6 +10,20 @@ export default class Home extends React.Component {
       categories: ['food', 'drinks'],
       items: [
         {
+          "name": "abc",
+          "photoUrl": "noURL",
+          "cat": "food",
+          "price": "1222.22",
+          "descr": "ex description 1"
+        },
+        {
+          "name": "xybbfdzgfsddfbxf",
+          "photoUrl": "noURL",
+          "cat": "food",
+          "price": "0.555",
+          "descr": "ex description 1"
+        },
+        {
           "name": "exmaple1",
           "photoUrl": "noURL",
           "cat": "food",
@@ -59,7 +73,10 @@ export default class Home extends React.Component {
         onNewProductAdd={this.handleNewProduct}
       />
     } else if(this.state.tab === 'table') {
-      tab = <Table items={this.state.items}/>
+      tab = <Table 
+        items={this.state.items}
+        categories={this.state.categories}
+      />
     }
 
     return(
