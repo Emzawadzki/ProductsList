@@ -15,8 +15,20 @@ export default class AddProduct extends React.Component {
      * Function handling submit
      */
     handleSubmit = (e) => {
+        /**
+         * Find first not-used ID
+         */
+        function getId (arr) {
+            for(let i = 0; i <= arr.length + 1;  i++) {
+                if(!arr.includes(i)) return i;
+            }
+        }
         e.preventDefault();
+        /**
+         * Generate new product
+         */
         const newProduct = {
+            "id": getId(this.props.productsIdsArr),
             "name": this.state.name,
             "photoUrl": this.state.photoUrl,
             "cat": this.state.cat,
@@ -24,7 +36,6 @@ export default class AddProduct extends React.Component {
             "descr": this.state.descr
         };
         this.props.onNewProductAdd(newProduct);
-        
     }   
 
     /**

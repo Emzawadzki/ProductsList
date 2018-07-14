@@ -10,6 +10,7 @@ export default class Home extends React.Component {
       categories: ['food', 'drinks'],
       items: [
         {
+          "id": 0,
           "name": "abc",
           "photoUrl": "noURL",
           "cat": "food",
@@ -17,6 +18,7 @@ export default class Home extends React.Component {
           "descr": "ex description 1"
         },
         {
+          "id": 1,
           "name": "xybbfdzgfsddfbxf",
           "photoUrl": "noURL",
           "cat": "food",
@@ -24,6 +26,7 @@ export default class Home extends React.Component {
           "descr": "ex description 1"
         },
         {
+          "id": 4,
           "name": "exmaple1",
           "photoUrl": "noURL",
           "cat": "food",
@@ -31,6 +34,7 @@ export default class Home extends React.Component {
           "descr": "ex description 1"
         },
         {
+          "id": 10,
           "name": "exmaple2",
           "photoUrl": "noURL",
           "cat": "food",
@@ -57,12 +61,28 @@ export default class Home extends React.Component {
   }
 
   /**
-   * Handle receiving new product from child component
+   * Handle products changes TODO: change newProdHandler to [...]
    */
-  handleNewProduct = (product) => {
+  handleNewProduct = product => {
     this.setState({
       items: this.state.items.concat([product])
     })
+  }
+
+  handleDeleteProduct = id => {
+    this.setState({
+      items: this.state.items.filter(el => el.id !== Number(id))
+    })
+  }
+
+  handleEditProduct = item => {
+    const otherItems = this.state.items.filter(el => el.id !== item.id);
+    const newItems = [...otherItems, item];
+    this.setState({
+      items: newItems
+    })
+    console.log(newItems);
+    
   }
   
   render () {
@@ -71,11 +91,14 @@ export default class Home extends React.Component {
       tab = <AddProduct 
         categories={this.state.categories}
         onNewProductAdd={this.handleNewProduct}
+        productsIdsArr={this.state.items.map(el => el.id)}
       />
     } else if(this.state.tab === 'table') {
       tab = <Table 
         items={this.state.items}
         categories={this.state.categories}
+        onDeleteProduct={this.handleDeleteProduct}
+        onEditProduct={this.handleEditProduct}
       />
     }
 
