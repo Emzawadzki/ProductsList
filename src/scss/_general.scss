@@ -1,0 +1,34 @@
+body {
+  overflow-y: scroll;
+}
+
+.main-app {
+  margin: 0 auto;
+  max-width: 1000px;
+  font-size: 20px;
+}
+
+.flex--col {
+  display: flex;
+  flex-direction: column
+}
+
+// mixins
+
+@mixin button ($color, $background, $focus:$background) {
+  cursor: pointer;
+  font-size: 20px;
+  color: $color;
+  background: $background;
+  border: 2px solid $color;
+  border-radius: 6px;
+  padding: 25px;
+  transition: 0.25s all;
+  outline: none;
+  &:hover {
+    box-shadow: inset 0 0 10px 3px $color;
+  }
+  &:focus {
+    outline: 1px dotted $focus;
+  }
+}

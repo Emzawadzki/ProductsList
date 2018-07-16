@@ -1,0 +1,16 @@
+.add-product {
+  margin: 0 auto;
+  max-width: 400px;
+  &__label {
+
+  }
+  &__input {
+    resize: none;
+    font-size: $main--font-size;
+  }
+  &__button {
+    margin: 10px auto;
+    @include button($main--text-color, $main--color);
+    width: 50%;
+  }
+}

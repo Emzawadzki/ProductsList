@@ -1,0 +1,8 @@
+.home {
+  padding: 20px 0;
+  background: $main--bgr-color;
+  &__tab-button {
+    @include button($main--text-color, $main--color);
+    margin: 0 0 20px 20px;
+  }
+}

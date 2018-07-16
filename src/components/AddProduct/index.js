@@ -9,6 +9,7 @@ export default class AddProduct extends React.Component {
             cat: this.props.categories[0],
             price: '',
             descr: '',
+            prodAdded: false
         }
     }
     /**
@@ -36,6 +37,18 @@ export default class AddProduct extends React.Component {
             "descr": this.state.descr
         };
         this.props.onNewProductAdd(newProduct);
+
+        /**
+         * Clear form, show SUCCESS message
+         */
+        this.setState({
+            name: '',
+            photoUrl: '',
+            cat: this.props.categories[0],
+            price: '',
+            descr: '',
+            prodAdded: true
+        })
     }   
 
     /**
@@ -67,22 +80,27 @@ export default class AddProduct extends React.Component {
     }
 
     render () {
+        let success = this.state.prodAdded ? 
+        <span className="add-product__success">
+            Product Added!
+        </span> : null;
         let categories = this.props.categories.map((el, i) => <option key={i} value={el}>{el}</option>);
         return(
-            <form onSubmit={this.handleSubmit}>
-                <label htmlFor="name">Name:</label>
-                <input type="text" name="name" onChange={this.handleNameChange}/>
-                <label htmlFor="photo">PhotoURL:</label>
-                <input type="text" name="photo" onChange={this.handlePhotoChange}/>
-                <label htmlFor="category">Category:</label>
-                <select name="Category" id="category" onChange={this.handleCatChange}>
+            <form onSubmit={this.handleSubmit} className="add-product flex--col">
+                <label htmlFor="name" className="add-product__label">Name:</label>
+                <input type="text" name="name" onChange={this.handleNameChange} className="add-product__input" value={this.state.name}/>
+                <label htmlFor="photo" className="add-product__label">PhotoURL:</label>
+                <input type="text" name="photo" onChange={this.handlePhotoChange} className="add-product__input"  value={this.state.photoUrl}/>
+                <label htmlFor="category" className="add-product__label">Category:</label>
+                <select name="Category" id="category" onChange={this.handleCatChange} className="add-product__input" value={this.state.cat}>
                     {categories}
                 </select>
-                <label htmlFor="price">Price:</label>
-                <input type="text" name="price" onChange={this.handlePriceChange}/>
-                <label htmlFor="description">Description:</label>
-                <textarea name="description" id="description" cols="30" rows="10" onChange={this.handleDescrChange}/>
-                <button type="submit">ADD</button>
+                <label htmlFor="price" className="add-product__label">Price:</label>
+                <input type="text" name="price" onChange={this.handlePriceChange} className="add-product__input" value={this.state.price}/>
+                <label htmlFor="description" className="add-product__label">Description:</label>
+                <textarea name="description" id="description" cols="30" rows="10" onChange={this.handleDescrChange} className="add-product__input" value={this.state.descr}/>
+                <button type="submit" className="add-product__button">ADD</button>
+                {success}
             </form>
         )
     }

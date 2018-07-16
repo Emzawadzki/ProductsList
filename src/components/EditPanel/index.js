@@ -54,30 +54,33 @@ export default class EditPanel extends React.Component {
       "descr": this.state.nextDescr
     }
     this.props.onEditSubmit(editedItem);
-    console.log('submit - edit panel');
-    
+  }
+
+  /**
+   * Handle cancel
+   */
+  handleCancel = e => {
+    this.props.onCancelSubmit();
   }
 
   render () {
-    console.log(this.props.itemToEdit);
-    
     let categories = this.props.categories.map((el, i) => <option key={i} value={el}>{el}</option>);
     return(
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" name="name" value={this.state.nextName} onChange={this.handleNameChange}/>
-        <label htmlFor="photo">PhotoURL:</label>
-        <input type="text" name="photo" value={this.state.nextPhotoUrl} onChange={this.handlePhotoChange}/>
-        <label htmlFor="category">Category:</label>
-        <select name="Category" id="category" onChange={this.handleCatChange}>
+      <form onSubmit={this.handleSubmit} className="edit-product">
+        <label className="edit-product__label" htmlFor="name">Name:</label>
+        <input className="edit-product__input" type="text" name="name" value={this.state.nextName} onChange={this.handleNameChange}/>
+        <label className="edit-product__label" htmlFor="photo">PhotoURL:</label>
+        <input className="edit-product__input" type="text" name="photo" value={this.state.nextPhotoUrl} onChange={this.handlePhotoChange}/>
+        <label className="edit-product__label" htmlFor="category">Category:</label>
+        <select className="edit-product__input" name="Category" id="category" onChange={this.handleCatChange}>
             {categories}
         </select>
-        <label htmlFor="price">Price:</label>
-        <input type="text" name="price" value={this.state.nextPrice} onChange={this.handlePriceChange}/>
-        <label htmlFor="description">Description:</label>
-        <textarea name="description" id="description" cols="30" rows="10" value={this.state.nextDescr} onChange={this.handleDescrChange}/>
-        <button type="submit">SAVE</button>
-        <button type="button">CANCEL</button>
+        <label className="edit-product__label" htmlFor="price">Price:</label>
+        <input className="edit-product__input" type="text" name="price" value={this.state.nextPrice} onChange={this.handlePriceChange}/>
+        <label className="edit-product__label" htmlFor="description">Description:</label>
+        <textarea className="edit-product__input" name="description" id="description" cols="30" rows="10" value={this.state.nextDescr} onChange={this.handleDescrChange}/>
+        <button className="edit-product__button" type="submit">SAVE</button>
+        <button className="edit-product__button" type="button" onClick={this.handleCancel}>CANCEL</button>
       </form>
     )
   }

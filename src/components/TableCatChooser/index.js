@@ -14,7 +14,6 @@ export default class TableCatChooser extends React.Component {
   handleCheckboxCheck = e => {
     // e.preventDefault();
     let catArr = [...this.state.displCategories];
-    console.log(catArr);
     
     if(catArr.indexOf(e.target.name) !== -1) {
       this.setState({
@@ -41,19 +40,19 @@ export default class TableCatChooser extends React.Component {
      */
     let categories = [...this.props.categories].map((el, i) => {
       if(this.state.displCategories.includes(el)) {
-        return <label key={i}>
-          <input type="checkbox" name={el} onChange={e => this.handleCheckboxCheck(e)}checked={true}/>
+        return <label key={i} className="cat-chooser__label">
+          <input type="checkbox" name={el} onChange={e => this.handleCheckboxCheck(e)}checked={true} className="cat-chooser__input"/>
           {el}
         </label>
       }
-      return <label key={i}>
-        <input type="checkbox" name={el} onChange={e => this.handleCheckboxCheck(e)} checked={false}/>
+      return <label key={i} className="cat-chooser__label">
+        <input type="checkbox" name={el} onChange={e => this.handleCheckboxCheck(e)} checked={false} className="cat-chooser__input"/>
         {el}
       </label>
     })
     
     return(
-      <div>
+      <div className="cat-chooser">
         {categories}
       </div>
     )

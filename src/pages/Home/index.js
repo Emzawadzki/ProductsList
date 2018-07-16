@@ -7,39 +7,47 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       tab: 'addProduct',
-      categories: ['food', 'drinks'],
+      categories: ['baking', 'drinks', 'vegetables', 'fruit'],
       items: [
         {
           "id": 0,
-          "name": "abc",
-          "photoUrl": "noURL",
-          "cat": "food",
-          "price": "1222.22",
-          "descr": "ex description 1"
+          "name": "Bread",
+          "photoUrl": "https://images.pexels.com/photos/209206/pexels-photo-209206.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          "cat": "baking",
+          "price": "2.99",
+          "descr": "Fresh and crispy."
         },
         {
           "id": 1,
-          "name": "xybbfdzgfsddfbxf",
-          "photoUrl": "noURL",
-          "cat": "food",
-          "price": "0.555",
-          "descr": "ex description 1"
+          "name": "Bread roll",
+          "photoUrl": "https://images.pexels.com/photos/2434/bread-food-healthy-breakfast.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          "cat": "baking",
+          "price": "0.60",
+          "descr": "Yummy!"
         },
         {
           "id": 4,
-          "name": "exmaple1",
-          "photoUrl": "noURL",
-          "cat": "food",
-          "price": "2.50",
-          "descr": "ex description 1"
+          "name": "Tomato",
+          "photoUrl": "https://images.pexels.com/photos/5617/red-tomato-vegetable.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          "cat": "vegetables",
+          "price": "1.90",
+          "descr": "Red and full of vitamins!"
         },
         {
           "id": 10,
-          "name": "exmaple2",
-          "photoUrl": "noURL",
-          "cat": "food",
+          "name": "Apple",
+          "photoUrl": "https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          "cat": "fruit",
           "price": "2.80",
-          "descr": "ex description 2"
+          "descr": "An apple. Juicy!"
+        },
+        {
+          "id": 11,
+          "name": "Milk",
+          "photoUrl": "https://images.pexels.com/photos/533307/pexels-photo-533307.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          "cat": "drinks",
+          "price": "3.40",
+          "descr": "The cow gave its best, that's for sure!"
         }
       ]
     }
@@ -61,11 +69,11 @@ export default class Home extends React.Component {
   }
 
   /**
-   * Handle products changes TODO: change newProdHandler to [...]
+   * Handle products changes
    */
   handleNewProduct = product => {
     this.setState({
-      items: this.state.items.concat([product])
+      items: [...this.state.items, product]
     })
   }
 
@@ -81,8 +89,6 @@ export default class Home extends React.Component {
     this.setState({
       items: newItems
     })
-    console.log(newItems);
-    
   }
   
   render () {
@@ -103,9 +109,9 @@ export default class Home extends React.Component {
     }
 
     return(
-      <div>
-        <button onClick={this.handleAddProductChange}>AddProduct</button>
-        <button onClick={this.handleTableChange}>Table</button>
+      <div className="home">
+        <button onClick={this.handleAddProductChange}  className="home__tab-button">AddProduct</button>
+        <button onClick={this.handleTableChange} className="home__tab-button">Table</button>
         {tab}
       </div>
     )

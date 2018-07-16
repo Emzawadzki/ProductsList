@@ -26,10 +26,15 @@ export default class Table extends React.Component {
      * Edit element handler
      */
     handleEditSubmit = item => {
-        console.log('table - submit edit');
         this.props.onEditProduct(item);
         this.setState({
             editElId: '',
+            editPanelVisible: false
+        })
+    }
+
+    handleCancelSubmit = e => {
+        this.setState({
             editPanelVisible: false
         })
     }
@@ -103,7 +108,7 @@ export default class Table extends React.Component {
          * Exclude with search
          */
         tabContent = tabContent.filter(el => {
-            return el.name.indexOf(this.state.search) !== -1
+            return el.name.toUpperCase().indexOf(this.state.search.toUpperCase()) !== -1
         })
 
         /**
@@ -112,12 +117,14 @@ export default class Table extends React.Component {
         tabContent = tabContent.map((el, i) => {
             return <tr key={i} data-id={el.id} className="products-table__row">
                 <td className="products-table__cell">{el.name}</td>
-                <td className="products-table__cell"><img src={el.photoUrl} alt={el.name + "-image"}/></td>
+                <td className="products-table__cell"><img src={el.photoUrl} alt={el.name + "-image"} className="products-table__img"/></td>
                 <td className="products-table__cell">{el.cat}</td>
                 <td className="products-table__cell">{'$' + el.price}</td>
                 <td className="products-table__cell">{el.descr}</td>
-                <td className="products-table__cell"><button onClick={e => this.handleDeleteButton(e)}>DELETE</button></td>
-                <td className="products-table__cell"><button onClick={e => this.handleEditButton(e)}>EDIT</button></td>
+                <td className="products-table__cell">
+                    <button onClick={e => this.handleDeleteButton(e)} className="products-table__button">DELETE</button>
+                    <button onClick={e => this.handleEditButton(e)} className="products-table__button">EDIT</button>
+                </td>
             </tr>
         });
 
@@ -128,6 +135,7 @@ export default class Table extends React.Component {
             editPanel = <EditPanel
                 itemToEdit={editItem}
                 onEditSubmit={this.handleEditSubmit}
+                onCancelSubmit={this.handleCancelSubmit}
                 categories={this.props.categories}
             />
         }
@@ -136,13 +144,13 @@ export default class Table extends React.Component {
          * Output
          */
         return(
-            <div>
-                <label htmlFor="search">Search:</label>
-                <input type="text" name="search" onChange={e => this.handleSearchChange(e)}/>
+            <div className="products-list">
+                <label htmlFor="search" className="products-list__label">Search:</label>
+                <input type="text" name="search" onChange={e => this.handleSearchChange(e)} className="products-list__input"/>
                 {editPanel}
                 <table className="products-table">
                     <tbody className="products-table__body">
-                        <tr className="products-table__row">
+                        <tr className="products-table__head-row">
                             <th className="products-table__head-cell" onClick={this.handleSortByName}>Name:</th>
                             <th className="products-table__head-cell" >Photo:</th>
                             <th className="products-table__head-cell">Category:
