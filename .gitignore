@@ -62,6 +62,3 @@ typings/
 
 # lock files
 *.lock
-
-# dist folder
-dist
